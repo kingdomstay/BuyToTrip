@@ -19,5 +19,5 @@ def search(req):
         departure_id = Airport.objects.get(code=departure_from)
         country_id = Country.objects.get(name__contains=where_go)
         if departure_id and country_id:
-            tours = Tour.objects.filter(departure=departure_id, count_travelers=count_travelers, hotel__city__country=country_id).order_by('-departure_date')
+            tours = Tour.objects.filter(departure=departure_id, count_travelers=count_travelers, hotel__city__country=country_id).order_by('departure_date')
             return render(req, 'results.html', {"results": tours, "count": tours.count(), "countries": countries, "departures": departures})

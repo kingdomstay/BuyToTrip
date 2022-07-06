@@ -47,10 +47,14 @@ class Tour(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, null=True)
     departure = models.ForeignKey(Airport, on_delete=models.CASCADE, null=True)
     description = models.TextField('Описание тура', max_length=280, blank=True)
+    count_travelers = models.SmallIntegerField('Количество человек', default=2, null=False)
     promoted = models.BooleanField('Продвижение в блоке с рекламой', default=False)
-    departure_date = models.DateTimeField(null=True)
-    arrival_date = models.DateTimeField(null=True)
-    count_travelers = models.SmallIntegerField(default=2, null=False)
+    price = models.SmallIntegerField('Цена тура', default=0)
+    departure_date = models.DateTimeField('Дата оправления', null=True)
+    arrival_date = models.DateTimeField('Дата прибытия', null=True)
+
+    def count_nights(self):
+        return (self.arrival_date - self.departure_date).days
 
     def __str__(self):
         return 'Тур в город {} в отель {}'.format(self.hotel.city, self.hotel.name)

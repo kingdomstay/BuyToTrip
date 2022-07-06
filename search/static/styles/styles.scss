@@ -1,0 +1,15 @@
+@use "base";
+@use "views/index";
+@use "views/results";
+@use "views/tour";
+
+@import "colors";
+@import "normalize.css";
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-size: 18px;
+  font-family: 'Rubik', sans-serif;
+}

@@ -1,0 +1,39 @@
+@import "../colors";
+
+.details {
+  background: $white;
+  box-shadow: 4px 8px 13px rgba(0, 0, 0, 0.15);
+  border-radius: 18px;
+  padding: 18px;
+}
+.description {
+  background: $white;
+  box-shadow: 4px 8px 13px rgba(0, 0, 0, 0.15);
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.hotel {
+  &__title {
+    margin-top: 4px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 38px;
+  }
+  &__field {
+    margin: 3px 0;
+  }
+  &__link {
+    text-decoration: none;
+    color: $green;
+    &:hover {
+      color: darken($green, 10);
+    }
+  }
+  &__actions {
+    display: flex;
+    align-items: flex-start;
+    justify-content: stretch;
+  }
+}

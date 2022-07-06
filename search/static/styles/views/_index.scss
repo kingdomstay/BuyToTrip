@@ -1,0 +1,61 @@
+@import "../colors";
+
+.hero {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  max-height: 700px;
+  height: 35vh;
+  background: #61b4b7 url("/static/images/hero_cover.jpg") no-repeat;
+  background-size: cover;
+  &__wrapper {
+    width: 1252px;
+  }
+  &__title {
+    line-height: 38px;
+    font-size: 32px;
+    font-weight: 600;
+    color: $white;
+  }
+  &__logo {
+    height: 32px;
+    width: auto;
+    margin-bottom: -6px;
+  }
+  &__input-group {
+    margin-top: 12px;
+    background: $white;
+    box-shadow: 4px 4px 42px rgba(0, 0, 0, 0.15);
+    border-radius: 42px;
+    margin-bottom: -48px;
+    padding: 30px 26px;
+    display: flex;
+  }
+  &__count-travelers {
+    max-width: 250px;
+  }
+  &__search {
+    max-width: 175px;
+  }
+}
+.ad-travels {
+  margin-top: 108px;
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+}
+.ad-banner {
+  &__title {
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1;
+    margin-top: 0;
+    opacity: .75;
+  }
+  &__image {
+    width: 100%;
+    height: auto;
+  }
+}

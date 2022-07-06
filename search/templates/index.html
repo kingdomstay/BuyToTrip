@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Путешествуйте по всему миру вместе с нами!{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section class="main__hero hero">
+        <div class="hero__wrapper container">
+            <h1 class="hidden">Поиск дешёвых путешествий от BuyToTrip</h1>
+            <p class="hero__title title container">Поиск дешёвых путешествий от <img class="hero__logo" src="{% static "images/logo_white.svg" %}" alt=""></p>
+            <form action="{% url 'search' %}" method="get" class="hero__input-group input-group">
+                <div class="input-group__field">
+                    <div class="form-control">
+                        <label for="where_go" class="form-control__icon icon">public</label>
+                        <input id="where_go" list="where_go_list" class="form-control__input" type="text" placeholder="Куда едем?" required name="where_go">
+                        <datalist id="where_go_list">
+                            {% for country in countries %}
+                                <option value="{{ country.name }}"></option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                </div>
+                <div class="input-group__field hero__count-travelers">
+                    <div class="form-control">
+                        <label for="count_travelers" class="form-control__icon icon">group</label>
+                        <input id="count_travelers" class="form-control__input" type="number" min="1" max="25" step="1" name="travelers" value="2" required>
+                    </div>
+                </div>
+                <div class="input-group__field">
+                    <div class="form-control">
+                        <label for="departure" class="form-control__icon icon">flight_takeoff</label>
+                        <input id="departure" list="departure_list" class="form-control__input" type="text" placeholder="Вылет из" required name="departure_from">
+                        <datalist id="departure_list">
+                            {% for departure in departures %}
+                                <option value="{{ departure.code }}">{{ departure.city }}</option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                </div>
+            {% csrf_token %}
+                <div class="input-group__field hero__search">
+                    <div class="form-control">
+                        <button class="form-control__button" type="submit">Поехали!</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="main__ad-travels ad-travels container">
+        <h2 class="ad-travels__title title">Партнёрские туры</h2>
+        <div class="ad-travels__items">
+            <div class="ad-travels__card card card_row">
+                <div class="card__preview">
+                    <img src="public/images/templates/preview_1.jpg" alt="" class="card__preview-image">
+                    <div class="card__tags">
+
+                    </div>
+                    <div class="card__content">
+                        <p class="card__title">
+                            KLAS MORE BEACH HOTEL
+                        </p>
+                        <p class="card__subtitle">
+                            27 июн, 6 ночей
+                        </p>
+                        <p class="card__description">
+                            Алания, Турция
+                        </p>
+                    </div>
+                    <div class="card__footer">
+                        <p class="card__price">
+                            37 332 ₽
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="ad-travels__card card card_row">
+                <div class="card__preview">
+                    <img src="public/images/templates/preview_1.jpg" alt="" class="card__preview-image">
+                    <div class="card__tags">
+
+                    </div>
+                    <div class="card__content">
+                        <p class="card__title">
+                            KLAS MORE BEACH HOTEL
+                        </p>
+                        <p class="card__subtitle">
+                            27 июн, 6 ночей
+                        </p>
+                        <p class="card__description">
+                            Алания, Турция
+                        </p>
+                    </div>
+                    <div class="card__footer">
+                        <p class="card__price">
+                            37 332 ₽
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="ad-travels__card card card_row">
+                <div class="card__preview">
+                    <img src="public/images/templates/preview_1.jpg" alt="" class="card__preview-image">
+                    <div class="card__tags">
+
+                    </div>
+                    <div class="card__content">
+                        <p class="card__title">
+                            KLAS MORE BEACH HOTEL
+                        </p>
+                        <p class="card__subtitle">
+                            27 июн, 6 ночей
+                        </p>
+                        <p class="card__description">
+                            Алания, Турция
+                        </p>
+                    </div>
+                    <div class="card__footer">
+                        <p class="card__price">
+                            37 332 ₽
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section class="main__ad-banner ad-banner container">
+        <img src="public/images/ad.jpg" alt="" class="ad-banner__image">
+        <h2 class="ad-banner__title title">perfilov.ru · реклама</h2>
+    </section>
+</main>
+{% endblock %}

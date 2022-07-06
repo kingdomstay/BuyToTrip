@@ -1,0 +1,50 @@
+@import "../colors";
+
+.header {
+  background: $white;
+  box-shadow: 4px 4px 42px rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 18px 18px;
+  &.container {
+    width: 1252px;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.navigation {
+  margin: 8px auto 8px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  border-radius: 80px;
+  &__brand {
+    display: block;
+    width: auto;
+    height: 30px;
+    margin: 32px 0 32px 0;
+  }
+  &__search {
+    flex: auto 1;
+  }
+  &__search-button {
+    width: auto;
+  }
+}
+
+.main {
+  &-fixed-top {
+    padding-top: 145px;
+  }
+  &__results {
+    margin: 32px 0 48px 0;
+  }
+}
+
+.results {
+  &__items {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+  }
+}

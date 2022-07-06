@@ -1,0 +1,219 @@
+@import "colors";
+
+.hidden {
+  display: none;
+  user-select: none;
+  pointer-events: none;
+}
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+.icon {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: $black;
+}
+.header {
+  z-index: 99;
+}
+.darken {
+  background: #FBFBFB;
+}
+.main {
+  &__title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+  }
+  &__2x-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 48px;
+  }
+}
+
+.input-group {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  &__field {
+    border-top: 2px solid $green;
+    border-right: 2px solid $green;
+    border-bottom: 2px solid $green;
+    width: 100%;
+    &:first-child {
+      border-left: 2px solid $green;
+      border-radius: 18px 0 0 18px;
+      .form-control__input, .form-control__button {
+        border-radius: 14px 0 0 14px;
+      }
+    }
+    &:last-child {
+      border-radius: 0 18px 18px 0;
+      .form-control__input, .form-control__button {
+        border-radius: 0 14px 14px 0;
+      }
+    }
+    .form-control {
+      height: 68px;
+      position: relative;
+      width: inherit;
+      &__input, &__button {
+        background: transparent;
+        width: inherit;
+        height: inherit;
+      }
+      &__button {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $green;
+        border: none;
+      }
+    }
+  }
+}
+
+.form-control {
+  &__icon {
+    z-index: 2;
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
+    position: absolute;
+    font-size: 32px;
+    user-select: none;
+    cursor: text;
+  }
+  &__input {
+    border: none;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    padding-left: 62px;
+  }
+  &__button {
+    background: $green;
+    color: $white;
+    cursor: pointer;
+    transition: .2s;
+    &.form-control__button_rounded {
+      border-radius: 50% !important;
+      height: 100%;
+      width: auto;
+      aspect-ratio: 1/1;
+    }
+    &:hover {
+      background: darken($green, 3);
+    }
+    &:active {
+      background: darken($green, 5);
+    }
+  }
+}
+
+
+.card {
+  color: $black;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: left;
+  column-gap: 21px;
+  &.card_row {
+    display: block;
+  }
+  &__preview {
+  }
+  &__preview-image {
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+  }
+  &__title {
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 21px;
+  }
+  &__subtitle {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 21px;
+  }
+  &__description {
+    margin-top: 4px;
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 20px;
+    opacity: .5;
+  }
+  &__footer {
+    margin-top: 0;
+    margin-bottom: 28px;
+  }
+  &__price {
+    margin-top: 12px;
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 28px;
+  }
+}
+a.card {
+  &:hover {
+    .card__title {
+      color: $green;
+    }
+  }
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 8px;
+  margin-bottom: 18px;
+  &__main, &__other {
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+  &__main {
+    grid-column: 1 / 4;
+    border-radius: 8px;
+  }
+}
+
+.rating {
+  letter-spacing: -8px;
+  &__star {
+    padding: 0;
+    font-size: 32px;
+    color: #E5CB40;
+  }
+}

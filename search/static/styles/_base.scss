@@ -207,6 +207,13 @@ a.card {
     aspect-ratio: 16/9;
     object-fit: cover;
   }
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 4px;
+  }
   &__main {
     grid-column: 1 / 4;
     border-radius: 8px;

@@ -203,6 +203,13 @@ a.card:hover .card__title {
   aspect-ratio: 16/9;
   object-fit: cover;
 }
+.gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 4px;
+}
 .gallery__main {
   grid-column: 1/4;
   border-radius: 8px;

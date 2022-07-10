@@ -4,6 +4,13 @@
 {% load humanize %}
 
 {% block title %}{{ data.hotel.name }} на {{ data.count_nights }} {{ data.count_nights|ru_plural:"ночь,ночи,ночей" }} для {{ data.count_travelers }} {{ data.count_travelers|ru_plural:"человека, человек, человек" }}{% endblock %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'libs/lightbox/lightbox.css' %}">
+{% endblock %}
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static 'libs/lightbox/lightbox.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 <header class="header container">
@@ -65,10 +72,18 @@
     <div class="main__2x-grid">
         <section class="main__details details">
             <div class="details__gallery gallery">
-                <img src="{{ data.images.url }}" alt="" class="gallery__main" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
-                <img src="{{ data.images_2.url }}" alt="" class="gallery__other" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
-                <img src="{{ data.images_3.url }}" alt="" class="gallery__other" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
-                <img src="{{ data.images_4.url }}" alt="" class="gallery__other" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
+                <a href="{{ data.images.url }}" data-lightbox="tour" class="gallery__main">
+                    <img src="{{ data.images.url }}" alt="" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
+                </a>
+                <a href="{{ data.images_2.url }}" data-lightbox="tour" class="gallery__other">
+                    <img src="{{ data.images_2.url }}" alt="" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
+                </a>
+                <a href="{{ data.images_3.url }}" data-lightbox="tour" class="gallery__other">
+                    <img src="{{ data.images_3.url }}" alt="" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
+                </a>
+                <a href="{{ data.images_4.url }}" data-lightbox="tour" class="gallery__other">
+                    <img src="{{ data.images_4.url }}" alt="" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
+                </a>
             </div>
             <div class="details__hotel hotel">
                 <div class="hotel__rating rating">

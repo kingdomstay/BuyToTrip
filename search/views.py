@@ -45,3 +45,4 @@ def request_form(req):
         return render(req, 'success.html', {"data": tour_obj, "id": request_id.id})
     else:
         return redirect('index')
+

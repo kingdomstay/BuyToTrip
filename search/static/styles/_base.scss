@@ -143,12 +143,16 @@
   column-gap: 21px;
   &.card_row {
     display: block;
+    .card__preview-image {
+      width: 100%;
+    }
   }
   &__preview {
   }
   &__preview-image {
     border-radius: 8px;
-    width: 100%;
+    width: 500px;
+    max-width: 650px;
     height: 100%;
     object-fit: cover;
     aspect-ratio: 16/9;
@@ -215,5 +219,23 @@ a.card {
     padding: 0;
     font-size: 32px;
     color: #E5CB40;
+  }
+}
+
+.count-travelers {
+  max-width: 250px;
+}
+
+.print-page {
+  display: none;
+}
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+@media print {
+  .print-page {
+    display: block !important;
   }
 }

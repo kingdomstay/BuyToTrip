@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% load users_extra %}
+{% load humanize %}
+
+{% block title %}Успешно!{% endblock %}
+
+{% block content %}
+<main class="main main-fixed-top container">
+    <h1 class="no-print">Ваша заявка №{{ id }} принята</h1>
+    <h2 class="no-print">Ожидайте звонка оператора для уточнения времени и места для заключения договора.</h2>
+    <p class="no-print">Для того, чтобы распечатать информацию о заказе нажмите Ctrl + P или найдите пункт печати в настройках страницы.</p>
+    <div class="print-page">
+        <p class="print-page__title">{{ data.hotel.name }}</p>
+        <p class="print-page__description">
+            Детали заказа:
+        </p>
+        <p class="print-page__field">{{ data.hotel.name|upper }}{% if data.hotel.stars != 0 %} {{ data.hotel.stars }}*{% endif %} </p>
+        <p class="print-page__field">Стоимость: {{ data.price|intcomma }} ₽</p>
+        {% if data.site_url %}<p class="print-page__field">Сайт: <a href="{{ data.site_url }}" target="_blank">{{ data.site_url }}</a></p>{% endif %}
+        {% if data.contact_phone %}<p class="print-page__field">Телефон: <a href="tel:{{ data.contact_phone }}">{{ data.contact_phone }}</a></p>{% endif %}
+        <p class="print-page__field">
+            {{ data.departure_date|date:"d M"|lower}}, на {{ data.count_nights }} {{ data.count_nights|ru_plural:"ночь,ночи,ночей" }}
+        </p>
+        {% if data.description %}
+        <p class="print-page__field">
+            Описание: {{ data.description }}
+        </p>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

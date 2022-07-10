@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load users_extra %}
+{% load humanize %}
 
 
 {% block title %}Путешествуйте по всему миру вместе с нами!{% endblock %}
@@ -51,82 +53,36 @@
     <section class="main__ad-travels ad-travels container">
         <h2 class="ad-travels__title title">Партнёрские туры</h2>
         <div class="ad-travels__items">
-            <div class="ad-travels__card card card_row">
+            {% for tour in tours %}
+                <a href="{% url 'tour' tour.id %}" class="ad-travels__card card card_row">
                 <div class="card__preview">
-                    <img src="public/images/templates/preview_1.jpg" alt="" class="card__preview-image">
+                    <img src="{{ tour.images.url }}" alt="" class="card__preview-image">
                     <div class="card__tags">
 
                     </div>
                     <div class="card__content">
                         <p class="card__title">
-                            KLAS MORE BEACH HOTEL
+                            {{ tour.hotel.name|upper }}
                         </p>
                         <p class="card__subtitle">
-                            27 июн, 6 ночей
+                            {{ tour.departure_date|date:"d M"|lower}}, {{ tour.count_nights }} {{ tour.count_nights|ru_plural:"ночь,ночи,ночей" }}
                         </p>
                         <p class="card__description">
-                            Алания, Турция
+                            {{ tour.hotel.city }}, {{ tour.hotel.city.country }}
                         </p>
                     </div>
                     <div class="card__footer">
                         <p class="card__price">
-                            37 332 ₽
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="ad-travels__card card card_row">
-                <div class="card__preview">
-                    <img src="public/images/templates/preview_1.jpg" alt="" class="card__preview-image">
-                    <div class="card__tags">
-
-                    </div>
-                    <div class="card__content">
-                        <p class="card__title">
-                            KLAS MORE BEACH HOTEL
-                        </p>
-                        <p class="card__subtitle">
-                            27 июн, 6 ночей
-                        </p>
-                        <p class="card__description">
-                            Алания, Турция
-                        </p>
-                    </div>
-                    <div class="card__footer">
-                        <p class="card__price">
-                            37 332 ₽
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <a href="#" class="ad-travels__card card card_row">
-                <div class="card__preview">
-                    <img src="public/images/templates/preview_1.jpg" alt="" class="card__preview-image">
-                    <div class="card__tags">
-
-                    </div>
-                    <div class="card__content">
-                        <p class="card__title">
-                            KLAS MORE BEACH HOTEL
-                        </p>
-                        <p class="card__subtitle">
-                            27 июн, 6 ночей
-                        </p>
-                        <p class="card__description">
-                            Алания, Турция
-                        </p>
-                    </div>
-                    <div class="card__footer">
-                        <p class="card__price">
-                            37 332 ₽
+                            {{ tour.price|intcomma }} ₽
                         </p>
                     </div>
                 </div>
             </a>
+            {% endfor %}
         </div>
     </section>
     <section class="main__ad-banner ad-banner container">
-        <img src="public/images/ad.jpg" alt="" class="ad-banner__image">
+        <a href=""><img src="public/images/ad.jpg" alt="" class="ad-banner__image"></a>
         <h2 class="ad-banner__title title">perfilov.ru · реклама</h2>
     </section>
 </main>

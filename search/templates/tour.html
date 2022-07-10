@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+{% load users_extra %}
+{% load humanize %}
+
+{% block title %}{{ data.hotel.name }} на {{ data.count_nights }} {{ data.count_nights|ru_plural:"ночь,ночи,ночей" }} для {{ data.count_travelers }} {{ data.count_travelers|ru_plural:"человека, человек, человек" }}{% endblock %}
+
+{% block content %}
+<header class="header container">
+    <nav class="header__navigation navigation container">
+        <a href="{% url 'index' %}" class="navigation__brand">
+            <img src="{% static "images/logo_black.svg" %}" alt="Логотип BuyToTrip" class="navigation__logo">
+        </a>
+        <div class="navigation__search search">
+            <form action="{% url 'search' %}" method="get" class="input-group">
+                <div class="input-group__field" style="border-top-left-radius: 100px; border-bottom-left-radius: 100px">
+                    <div class="form-control" >
+                        <label for="where_go" class="form-control__icon icon">public</label>
+                        <input  style="border-top-left-radius: 100px; border-bottom-left-radius: 100px" id="where_go" list="where_go_list" class="form-control__input" type="text" placeholder="Куда едем?" required name="where_go">
+                        <datalist id="where_go_list">
+                            {% for country in countries %}
+                                <option value="{{ country.name }}"></option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                </div>
+            <div class="input-group__field count-travelers">
+                    <div class="form-control">
+                        <label for="count_travelers" class="form-control__icon icon">group</label>
+                        <input id="count_travelers" class="form-control__input" type="number" min="1" max="25" step="1" name="travelers" value="2" required>
+                    </div>
+                </div>
+            <div class="input-group__field" style="border-right: none">
+                    <div class="form-control">
+                        <label for="departure" class="form-control__icon icon">flight_takeoff</label>
+                        <input id="departure" list="departure_list" class="form-control__input" type="text" placeholder="Вылет из" required name="departure_from">
+                        <datalist id="departure_list">
+                            {% for departure in departures %}
+                                <option value="{{ departure.code }}">{{ departure.city }}</option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                </div>
+                {% csrf_token %}
+                <div class="input-group__field navigation__search-button" style="border-bottom-right-radius: 100px; border-top-right-radius: 100px;">
+                    <div class="form-control">
+                        <button class="form-control__button form-control__button_rounded" type="submit" style="border: 2px solid white"><span class="icon">manage_search</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+</header>
+<main class="main main-fixed-top container">
+<div class="form unvisible">
+    <form action="{% url 'success' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{ data.id }}" name="tour_id" readonly required>
+        <input type="number" name="contact_phone" placeholder="Телефон" required>
+        <input type="email" name="contact_email" placeholder="Email" required>
+        <button type="submit">Отправить заявку</button>
+        <button type="reset" onclick="toggleForm()" style="background: #a02323;"><span class="icon" style="font-size: 16px; transform: scale(1.5) translateY(2px);">close</span></button>
+    </form>
+</div>
+    <div class="main__2x-grid">
+        <section class="main__details details">
+            <div class="details__gallery gallery">
+                <img src="{{ data.images.url }}" alt="" class="gallery__main" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
+                <img src="{{ data.images_2.url }}" alt="" class="gallery__other" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
+                <img src="{{ data.images_3.url }}" alt="" class="gallery__other" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
+                <img src="{{ data.images_4.url }}" alt="" class="gallery__other" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';">
+            </div>
+            <div class="details__hotel hotel">
+                <div class="hotel__rating rating">
+                {% for x in ""|ljust:data.hotel.stars %}
+                    <span class="rating__star icon">star</span>
+                {% endfor %}
+                </div>
+                <h1 class="hotel__title title">{{ data.hotel.name|upper }}{% if data.hotel.stars != 0 %} {{ data.hotel.stars }}*{% endif %} </h1>
+            <p class="hotel__field">Стоимость тура: {{ data.price|intcomma }} ₽</p>
+                {% if data.site_url %}<p class="hotel__field">Сайт: <a href="{{ data.site_url }}" target="_blank" class="hotel__link">{{ data.site_url }}</a></p>{% endif %}
+                {% if data.contact_phone %}<p class="hotel__field">Телефон: <a href="tel:{{ data.contact_phone }}" class="hotel__link">{{ data.contact_phone }}</a></p>{% endif %}
+            <button onclick="toggleForm()" style="background: #0d7373; color: white; width: 100%; display: block; padding: 14px 0; margin-top: 8px; font-size: 18px; font-weight: 500; text-align: center; text-decoration: none; border-radius: 8px; border: none; cursor: pointer">
+                Заказать тур
+            </button>
+            </div>
+        </section>
+        <section class="main__description description">
+            <h2 class="title">Описание</h2>
+            <p>{% if data.description %}{{ data.description }}{% else %}Нет описания{% endif %}</p>
+        </section>
+    </div>
+</main>
+    <script>
+    function toggleForm() {
+        document.querySelector('.form').classList.toggle('unvisible')
+    }
+    </script>
+{% endblock %}

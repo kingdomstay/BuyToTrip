@@ -43,15 +43,26 @@ class Hotel(models.Model):
         return self.name
 
 
+class Discount(models.Model):
+    reduction = models.IntegerField('Размер скидки')
+
+
 class Tour(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, null=True)
     departure = models.ForeignKey(Airport, on_delete=models.CASCADE, null=True)
+    images = models.ImageField(null=True, upload_to="hotels/", blank=False)
+    images_2 = models.ImageField(null=True, upload_to="hotels/", blank=False)
+    images_3 = models.ImageField(null=True, upload_to="hotels/", blank=False)
+    images_4 = models.ImageField(null=True, upload_to="hotels/", blank=False)
     description = models.TextField('Описание тура', max_length=280, blank=True)
+    site_url = models.URLField('Сайт', blank=True)
+    contact_phone = models.TextField('Телефон', blank=True)
     count_travelers = models.SmallIntegerField('Количество человек', default=2, null=False)
     promoted = models.BooleanField('Продвижение в блоке с рекламой', default=False)
     price = models.SmallIntegerField('Цена тура', default=0)
     departure_date = models.DateTimeField('Дата оправления', null=True)
     arrival_date = models.DateTimeField('Дата прибытия', null=True)
+    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, blank=True, null=True)
 
     def count_nights(self):
         return (self.arrival_date - self.departure_date).days
@@ -60,6 +71,7 @@ class Tour(models.Model):
         return 'Тур в город {} в отель {}'.format(self.hotel.city, self.hotel.name)
 
 
-class Discount(models.Model):
-    tour = models.ForeignKey(Tour, on_delete=models.CASCADE)
-    reduction = models.IntegerField('Размер скидки')
+class Request(models.Model):
+    tour = models.ForeignKey(Tour, blank=False, on_delete=models.CASCADE)
+    phone = models.TextField('Телефон', blank=False)
+    email = models.EmailField()

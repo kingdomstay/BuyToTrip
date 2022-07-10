@@ -42,9 +42,9 @@
                     </div>
                 </div>
                 {% csrf_token %}
-                <div class="input-group__field navigation__search-button" style="border-right:none; border-bottom-right-radius: 100px; border-top-right-radius: 100px;">
+                <div class="input-group__field navigation__search-button" style="border-bottom-right-radius: 100px; border-top-right-radius: 100px;">
                     <div class="form-control">
-                        <button class="form-control__button form-control__button_rounded" type="submit"><span class="icon">manage_search</span></button>
+                        <button class="form-control__button form-control__button_rounded" type="submit" style="border: 2px solid white"><span class="icon">manage_search</span></button>
                     </div>
                 </div>
             </form>
@@ -59,9 +59,9 @@
         <h2 class="results__title hidden">Результаты поиска</h2>
         <div class="results__items">
             {% for tour in results %}
-                <a href="#" class="results__item card">
+                <a href="{% url 'tour' tour.id %}" class="results__item card">
                 <div class="card__preview">
-                    <img src="public/images/templates/preview_1.jpg" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';" alt="" class="card__preview-image">
+                    <img src="{{ tour.images.url }}" onerror="if (this.src !== '{% static "images/error_loading_image.png" %}') this.src = '{% static "images/error_loading_image.png" %}';" alt="" class="card__preview-image">
                     <div class="card__tags">
 
                     </div>

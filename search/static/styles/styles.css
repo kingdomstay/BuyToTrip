@@ -144,9 +144,13 @@
 .card.card_row {
   display: block;
 }
+.card.card_row .card__preview-image {
+  width: 100%;
+}
 .card__preview-image {
   border-radius: 8px;
-  width: 100%;
+  width: 500px;
+  max-width: 650px;
   height: 100%;
   object-fit: cover;
   aspect-ratio: 16/9;
@@ -213,6 +217,24 @@ a.card:hover .card__title {
   color: #E5CB40;
 }
 
+.count-travelers {
+  max-width: 250px;
+}
+
+.print-page {
+  display: none;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+@media print {
+  .print-page {
+    display: block !important;
+  }
+}
 .hero {
   display: flex;
   justify-content: flex-end;
@@ -331,6 +353,7 @@ a.card:hover .card__title {
   box-shadow: 4px 8px 13px rgba(0, 0, 0, 0.15);
   border-radius: 18px;
   padding: 28px;
+  align-self: start;
 }
 
 .hotel__title {
@@ -354,6 +377,42 @@ a.card:hover .card__title {
   display: flex;
   align-items: flex-start;
   justify-content: stretch;
+}
+
+.form {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  padding: 64px 48px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 0 100vh 100vh rgba(0, 0, 0, 0.3);
+}
+.form input {
+  width: 300px;
+  display: block;
+  margin-bottom: 8px;
+  border: 2px solid #108A8A;
+  font-size: 16px;
+  border-radius: 100px;
+  padding: 8px 16px;
+}
+.form button {
+  background: #108A8A;
+  color: #ffffff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+.unvisible {
+  display: none;
 }
 
 * {
